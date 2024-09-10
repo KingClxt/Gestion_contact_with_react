@@ -1,0 +1,15 @@
+-L'AbortController est une classe en JavaScript qui permet d'annuler des requêtes réseau telles que les requêtes fetch
+-Il est utiliser pour eviter que les requêtes http continue de s'executer lorsque le composant qui a initier la requete est demonter 
+SON UTILISATION:
+          const abortController = new AbortController()
+          fetch("https://jsonplaceholder.typicode.com/todos/1", {signal: abortController.signal})
+               .then(response=>response.json())
+               .then(result=>setFetchTodo(result))
+               l'option signal de la fonction fetch est utiliser pour associer un AbortController a un requete fetch
+et une fois le coomposant seras demonter pour ne pas que la reuquete continue meme quand le composant est demonter on utilise return () => abortController.abort()
+
+----------------------------swr
+
+swr utilise une forme de cache globale a mon application qui vas permettre de sauvegarder les donnee entre composant,
+ce qui signifie que si nous utilisons 2 fois un composant qui fait un fetch au traver de swr, il ne vas faire un seule fetch et garder les donnee 
+en cache pour que lorsque l'on appel le second composant il puissent savoir qu'il a deja fait cet appel reseau et qu'il ne doit plus en refaire
